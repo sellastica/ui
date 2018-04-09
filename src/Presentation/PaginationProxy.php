@@ -1,7 +1,6 @@
 <?php
 namespace Sellastica\UI\Presentation;
 
-use Sellastica\Twig\Exception\ObjectNotExistException;
 use Sellastica\Twig\Model\ProxyObject;
 
 /**
@@ -11,72 +10,57 @@ use Sellastica\Twig\Model\ProxyObject;
 class PaginationProxy extends ProxyObject
 {
 	/**
-	 * @param int $itemsPerPage
+	 * @return int|null
 	 */
-	public function setItemsPerPage($itemsPerPage)
-	{
-		$this->parent->setItemsPerPage($itemsPerPage);
-	}
-
-	/**
-	 * @return int|NULL
-	 * @throws ObjectNotExistException
-	 */
-	public function getItems()
+	public function getItems(): ?int
 	{
 		return $this->parent->getItemCount();
 	}
 
 	/**
 	 * @return int
-	 * @throws ObjectNotExistException
 	 */
-	public function getFirst_item_on_page()
+	public function getFirst_item_on_page(): int
 	{
 		return $this->parent->getFirstItemNumber();
 	}
 
 	/**
 	 * @return int
-	 * @throws ObjectNotExistException
 	 */
-	public function getLast_item_on_page()
+	public function getLast_item_on_page(): int
 	{
 		return $this->parent->getLastItemNumber();
 	}
 
 	/**
-	 * @return int|NULL
-	 * @throws ObjectNotExistException
+	 * @return int|null
 	 */
-	public function getPages()
+	public function getPages(): ?int
 	{
 		return $this->parent->getPageCount();
 	}
 
 	/**
-	 * @return FALSE|int
-	 * @throws ObjectNotExistException
+	 * @return int|null
 	 */
-	public function getPrevious_page()
+	public function getPrevious_page(): ?int
 	{
 		return $this->parent->getPreviousPage();
 	}
 
 	/**
-	 * @return FALSE|int
-	 * @throws ObjectNotExistException
+	 * @return int|null
 	 */
-	public function getNext_page()
+	public function getNext_page(): ?int
 	{
 		return $this->parent->getNextPage();
 	}
 
 	/**
 	 * @return int
-	 * @throws ObjectNotExistException
 	 */
-	public function getCurrent_page()
+	public function getCurrent_page(): int
 	{
 		return $this->parent->getPage();
 	}
@@ -85,7 +69,7 @@ class PaginationProxy extends ProxyObject
 	 * @param int $range
 	 * @return array
 	 */
-	public function getRange($range = \Sellastica\UI\Pagination\Pagination::DEFAULT_RANGE_SIZE)
+	public function getRange($range = \Sellastica\UI\Pagination\Pagination::DEFAULT_RANGE_SIZE): array
 	{
 		if (!is_int($range)) {
 			$range = \Sellastica\UI\Pagination\Pagination::DEFAULT_RANGE_SIZE;
@@ -98,7 +82,7 @@ class PaginationProxy extends ProxyObject
 	 * @param int $page
 	 * @return string
 	 */
-	public function getLink_to_page($page)
+	public function getLink_to_page($page): string
 	{
 		return $this->parent->getUrl($page);
 	}
@@ -107,7 +91,7 @@ class PaginationProxy extends ProxyObject
 	 * @param int $range
 	 * @return string
 	 */
-	public function getAsString($range = \Sellastica\UI\Pagination\Pagination::DEFAULT_RANGE_SIZE)
+	public function getAsString($range = \Sellastica\UI\Pagination\Pagination::DEFAULT_RANGE_SIZE): string
 	{
 		return $this->parent->getAsString($range);
 	}
@@ -115,7 +99,7 @@ class PaginationProxy extends ProxyObject
 	/**
 	 * @return string
 	 */
-	public function __toString()
+	public function __toString(): string
 	{
 		return $this->parent->getAsString();
 	}
@@ -123,7 +107,7 @@ class PaginationProxy extends ProxyObject
 	/**
 	 * @return string
 	 */
-	public function getShortName()
+	public function getShortName(): string
 	{
 		return 'pagination';
 	}
@@ -131,7 +115,7 @@ class PaginationProxy extends ProxyObject
 	/**
 	 * @return array
 	 */
-	public function getAllowedProperties()
+	public function getAllowedProperties(): array
 	{
 		return [
 			'items',

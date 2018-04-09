@@ -18,6 +18,7 @@ class Pagination extends Paginator implements IProxable
 	/** @var Nette\Http\IRequest */
 	private $request;
 
+
 	/**
 	 * @param Nette\Http\IRequest $request
 	 * @param int $itemsPerPage
@@ -29,25 +30,25 @@ class Pagination extends Paginator implements IProxable
 	}
 
 	/**
-	 * @return int|FALSE
+	 * @return int|null
 	 */
-	public function getPreviousPage()
+	public function getPreviousPage(): ?int
 	{
-		return !$this->isFirst() ? $this->getPage() - 1 : FALSE;
+		return !$this->isFirst() ? $this->getPage() - 1 : null;
 	}
 
 	/**
-	 * @return int|FALSE
+	 * @return int|null
 	 */
-	public function getNextPage()
+	public function getNextPage(): ?int
 	{
-		return !$this->isLast() ? $this->getPage() + 1 : FALSE;
+		return !$this->isLast() ? $this->getPage() + 1 : null;
 	}
 
 	/**
 	 * @return int
 	 */
-	public function getFirstItemNumber()
+	public function getFirstItemNumber(): int
 	{
 		return ($this->getPage() - 1) * $this->getItemsPerPage() + 1;
 	}
@@ -55,7 +56,7 @@ class Pagination extends Paginator implements IProxable
 	/**
 	 * @return int
 	 */
-	public function getLastItemNumber()
+	public function getLastItemNumber(): int
 	{
 		return min($this->getPage() * $this->getItemsPerPage(), $this->getItemCount());
 	}
@@ -64,7 +65,7 @@ class Pagination extends Paginator implements IProxable
 	 * @param int $rangeSize
 	 * @return array
 	 */
-	public function getRange($rangeSize = self::DEFAULT_RANGE_SIZE)
+	public function getRange($rangeSize = self::DEFAULT_RANGE_SIZE): array
 	{
 		$range = range(max($this->getPage() - $rangeSize, 1), min($this->getPage() + $rangeSize, $this->getPageCount()));
 		if ($range[0] === 3) {
@@ -84,7 +85,7 @@ class Pagination extends Paginator implements IProxable
 	 * @param $page
 	 * @return string
 	 */
-	public function getUrl($page)
+	public function getUrl($page): string
 	{
 		$url = $this->request->getUrl();
 		$url->setQueryParameter('page', (int)$page > 1 ? (int)$page : null);
@@ -95,7 +96,7 @@ class Pagination extends Paginator implements IProxable
 	 * @param int $range
 	 * @return string
 	 */
-	public function getAsString($range = self::DEFAULT_RANGE_SIZE)
+	public function getAsString($range = self::DEFAULT_RANGE_SIZE): string
 	{
 		if ($this->getPageCount() > 1) {
 			$ul = Html::el('ul')->class('pagination');
@@ -121,7 +122,7 @@ class Pagination extends Paginator implements IProxable
 			//pages
 			foreach ($range as $i) {
 				$a = Html::el('a')->href($this->getUrl($i))->setText($i);
-				if ($this->getPage() == $i) {
+				if ($this->getPage() === $i) {
 					$a->class('current');
 				}
 
@@ -145,7 +146,7 @@ class Pagination extends Paginator implements IProxable
 				$ul->addHtml(Html::el('li')->addHtml($a));
 			}
 
-			return (string) $ul;
+			return (string)$ul;
 		}
 
 		return '';
@@ -154,7 +155,7 @@ class Pagination extends Paginator implements IProxable
 	/**
 	 * @return string
 	 */
-	public function __toString()
+	public function __toString(): string
 	{
 		return $this->getAsString();
 	}
