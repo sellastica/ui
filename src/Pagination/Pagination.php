@@ -94,9 +94,15 @@ class Pagination extends Paginator implements IProxable
 
 	/**
 	 * @param int $range
+	 * @param string $previousTitle
+	 * @param string $nextTitle
 	 * @return string
 	 */
-	public function getAsString($range = self::DEFAULT_RANGE_SIZE): string
+	public function getAsString(
+		int $range = self::DEFAULT_RANGE_SIZE,
+		string $previousTitle = '&laquo;',
+		string $nextTitle = '&raquo;'
+	): string
 	{
 		if ($this->getPageCount() > 1) {
 			$ul = Html::el('ul')->class('pagination');
@@ -104,14 +110,14 @@ class Pagination extends Paginator implements IProxable
 
 			//previous page
 			if ($this->getPreviousPage()) {
-				$a = Html::el('a')->href($this->getUrl($this->getPreviousPage()))->setHtml('&laquo;');
-				$ul->addHtml(Html::el('li')->addHtml($a));
+				$a = Html::el('a')->href($this->getUrl($this->getPreviousPage()))->setHtml($previousTitle);
+				$ul->addHtml(Html::el('li')->class('pagination-previous')->addHtml($a));
 			}
 
 			//first page
 			if ($range[0] > 1) {
 				$a = Html::el('a')->href($this->getUrl(1))->setText(1);
-				$ul->addHtml(Html::el('li')->addHtml($a));
+				$ul->addHtml(Html::el('li')->class('pagination-first')->addHtml($a));
 			}
 
 			//...
@@ -122,11 +128,13 @@ class Pagination extends Paginator implements IProxable
 			//pages
 			foreach ($range as $i) {
 				$a = Html::el('a')->href($this->getUrl($i))->setText($i);
+
+				$li = Html::el('li');
 				if ($this->getPage() === $i) {
-					$a->class('current');
+					$li->class('current');
 				}
 
-				$ul->addHtml(Html::el('li')->addHtml($a));
+				$ul->addHtml($li->addHtml($a));
 			}
 
 			//...
@@ -137,13 +145,13 @@ class Pagination extends Paginator implements IProxable
 			//last page
 			if ($range[sizeof($range) - 1] < $this->getPageCount()) {
 				$a = Html::el('a')->href($this->getUrl($this->getPageCount()))->setText($this->getPageCount());
-				$ul->addHtml(Html::el('li')->addHtml($a));
+				$ul->addHtml(Html::el('li')->class('pagination-last')->addHtml($a));
 			}
 
 			//next page
 			if ($this->getNextPage()) {
-				$a = Html::el('a')->href($this->getUrl($this->getNextPage()))->setHtml('&raquo;');
-				$ul->addHtml(Html::el('li')->addHtml($a));
+				$a = Html::el('a')->href($this->getUrl($this->getNextPage()))->setHtml($nextTitle);
+				$ul->addHtml(Html::el('li')->class('pagination-next')->addHtml($a));
 			}
 
 			return (string)$ul;

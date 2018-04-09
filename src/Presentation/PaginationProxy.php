@@ -6,6 +6,7 @@ use Sellastica\Twig\Model\ProxyObject;
 /**
  * {@inheritdoc}
  * @property \Sellastica\UI\Pagination\Pagination $parent
+ * @method \Sellastica\UI\Pagination\Pagination getParent
  */
 class PaginationProxy extends ProxyObject
 {
@@ -85,15 +86,6 @@ class PaginationProxy extends ProxyObject
 	public function getLink_to_page($page): string
 	{
 		return $this->parent->getUrl($page);
-	}
-
-	/**
-	 * @param int $range
-	 * @return string
-	 */
-	public function getAsString($range = \Sellastica\UI\Pagination\Pagination::DEFAULT_RANGE_SIZE): string
-	{
-		return $this->parent->getAsString($range);
 	}
 
 	/**
