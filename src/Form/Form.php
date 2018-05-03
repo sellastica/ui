@@ -11,6 +11,10 @@ use Sellastica\Communication\IResponse;
  */
 class Form extends \Nette\Application\UI\Form
 {
+	const FIELD_REQUIRED = 'required',
+		FIELD_OPTIONAL = 'optional',
+		FIELD_HIDDEN = 'hidden';
+
 	/** @var array */
 	private $errors;
 
