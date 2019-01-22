@@ -27,7 +27,7 @@ class SwitchInput
 			->name($this->name)
 			->type('checkbox')
 			->id($this->id)
-			->class('switch-input');
+			->class('switch-input js-switch js-switch-1');
 
 		//label
 		$this->label = \Nette\Utils\Html::el('label')
@@ -71,7 +71,7 @@ class SwitchInput
 	 */
 	public function toHtml(): \Nette\Utils\Html
 	{
-		$el = \Nette\Utils\Html::el('span')->class('switch');
+		$el = \Nette\Utils\Html::el('span')->class('switch js-switch js-switch-1');
 		$el->addHtml($this->input);
 		$el->addHtml($this->label);
 
