@@ -24,15 +24,16 @@ class SwitchInput
 
 		//input
 		$this->input = \Nette\Utils\Html::el('input')
-			->name($this->name)
-			->type('checkbox')
-			->id($this->id)
-			->class('switch-input js-switch js-switch-1');
+			->setAttribute('data-color', '#b082fa')
+			->setAttribute('name', $this->name)
+			->setAttribute('type', 'checkbox')
+			->setAttribute('id', $this->id)
+			->setAttribute('class', 'switch-input js-switch js-switch-1');
 
 		//label
 		$this->label = \Nette\Utils\Html::el('label')
-			->for($this->id)
-			->class('switch-paddle');
+			->setAttribute('for', $this->id)
+			->setAttribute('class', 'switch-paddle');
 	}
 
 	/**
@@ -71,7 +72,8 @@ class SwitchInput
 	 */
 	public function toHtml(): \Nette\Utils\Html
 	{
-		$el = \Nette\Utils\Html::el('span')->class('switch js-switch js-switch-1');
+		$el = \Nette\Utils\Html::el('span')
+			->setAttribute('class', 'switch js-switch js-switch-1');
 		$el->addHtml($this->input);
 		$el->addHtml($this->label);
 
