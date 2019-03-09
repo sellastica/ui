@@ -7,6 +7,7 @@ use Sellastica\Communication\IResponse;
  * @method \Sellastica\PrettyForms\PrettyCheckbox addPrettyCheckbox($name, $caption = null)
  * @method \Sellastica\PrettyForms\PrettyCheckboxList addPrettyCheckboxList($name, $label = null, array $items = null)
  * @method \Sellastica\PrettyForms\PrettyRadioList addPrettyRadioList($name, $label = null, array $items = null)
+ * @method \Sellastica\PrettyForms\BootstrapRadioList addBootstrapRadioList($name, $label = null, array $items = null)
  * @method \Nette\Forms\Container|Form addContainer($name)
  * @method \Sellastica\PrettyForms\BootstrapCheckbox addBootstrapCheckbox($name, $caption = null)
  */
